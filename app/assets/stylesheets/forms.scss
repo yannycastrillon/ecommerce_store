@@ -1,0 +1,29 @@
+@import 'config.scss';
+
+.signin-component, .signup-component, .edit-user-component,
+.edit-password-component, .forgot-password-component {
+  background: $GRAY_BG_COMPONENT;
+  border: thin $LIGHTGRAY_BORDER_COMPONENT dashed;
+  width: 350px;
+  height: auto;
+  padding: 2em 3em;
+  margin: 2em auto;
+  text-align: center;
+
+  label {
+    color: $BLACK_LABEL_COMPONENT;
+    font-family: $FONT_LABEL_FORM;
+    font-size: 1em;
+  }
+
+  h2 {
+    color: $BLACK_H2;
+    border-bottom: 0.1em solid $BLACK_H2;
+    margin-bottom: 1em;
+    font-family: sans-serif;
+  }
+
+  input[class="form-control"] {
+    font-style: $FONT_LABEL_FORM;
+  }
+}
