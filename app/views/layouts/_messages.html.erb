@@ -1,3 +1,7 @@
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, id: "flash_#{name}" %>
-<% end %>
+<div class="flash-msg-component">
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, id: "flash_#{name}",
+        class:"#{flash_class(name)} mx-auto" 
+    %>
+  <% end %>
+</div>
