@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :is_admin?
 
   def is_admin?
-    return true if current_user.admin?
-    redirect_to root_path, flash: {error: "Warning! Only Admin privileges"}
+    user_signed_in? && current_user.admin? ? true : false
+    # redirect_to root_path, flash: {error: "Warning! Only Admin privileges"} and return
   end
 end
