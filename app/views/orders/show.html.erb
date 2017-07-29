@@ -45,10 +45,5 @@
   <%= @order.phone %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @order.user %>
-</p>
-
 <%= link_to 'Edit', edit_user_order_path(current_user,@order) %> |
 <%= link_to 'Back', user_orders_path %>

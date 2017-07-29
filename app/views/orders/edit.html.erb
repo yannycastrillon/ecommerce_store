@@ -3,6 +3,6 @@
 
   <%= render 'form', order: @order %>
 
-  <%= link_to 'Show', @order %> |
+  <%= link_to 'Show', user_order_path(current_user,@order) %> |
   <%= link_to 'Back', user_orders_path %>
 </div>
