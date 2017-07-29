@@ -1,7 +1,8 @@
 @import 'config.scss';
 
 .signin-component, .signup-component, .edit-user-component,
-.edit-password-component, .forgot-password-component, .confirmation-component {
+.edit-password-component, .forgot-password-component, .confirmation-component,
+.order-form-component, .user-form-component {
   background: $GRAY_BG_COMPONENT;
   border: thin $LIGHTGRAY_BORDER_COMPONENT dashed;
   width: 350px;

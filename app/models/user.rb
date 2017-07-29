@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :orders
   # ActiveRecord method enum, maps each symbol to an index in the db.
   enum role: [:customer, :admin]
   # This is a callback conditional
