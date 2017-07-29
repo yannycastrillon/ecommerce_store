@@ -1,0 +1,69 @@
+<div class="order-form-component">
+  <%= form_for(order) do |f| %>
+    <% if order.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+        <ul>
+        <% order.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :email, class:"control-label"  %>
+      <%= f.text_field :email, class:"form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :bill_firstname, class:"control-label"  %>
+      <%= f.text_field :bill_firstname, class:"form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :bill_lastname, class:"control-label"  %>
+      <%= f.text_field :bill_lastname, class:"form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :bill_address1, class:"control-label"  %>
+      <%= f.text_field :bill_address1, class:"form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :bill_address2, class:"control-label"  %>
+      <%= f.text_field :bill_address2, class:"form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :bill_city, class:"control-label"  %>
+      <%= f.text_field :bill_city, class:"form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :bill_state, class:"control-label"  %>
+      <%= f.text_field :bill_state, class:"form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :bill_zipcode, class:"control-label"  %>
+      <%= f.number_field :bill_zipcode, class:"form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :phone, class:"control-label"  %>
+      <%= f.number_field :phone, class:"form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :user_id, class:"control-label"  %>
+      <%= f.text_field :user_id, class:"form-control" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>
