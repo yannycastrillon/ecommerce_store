@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   # before_action :is_admin?, only: [:index]
-  
+
   # GET /orders
   def index
     @orders = Order.all
@@ -24,10 +24,10 @@ class OrdersController < ApplicationController
   # POST /orders
   def create
     @order = Order.new(order_params)
-
+    @order.user_id = current_user.id
     respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        format.html { redirect_to user_order_path(current_user,@order), notice: 'Order was successfully created.' }
       else
         format.html { render :new }
       end
@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        format.html { redirect_to user_order_path(current_user,@order), notice: 'Order was successfully updated.' }
       else
         format.html { render :edit }
       end
