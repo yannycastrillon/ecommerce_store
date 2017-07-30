@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<h2>Order Page</h2>
 <p>
   <strong>Email:</strong>
   <%= @order.email %>
@@ -44,6 +44,36 @@
   <strong>Phone:</strong>
   <%= @order.phone %>
 </p>
+
+<h3>Details of Order</h3>
+<hr>
+<br>
+<h4>Order Items</h4>
+<table>
+  <thead>
+    <tr>
+      <% OrderItem.column_names.map do |field| %>
+        <th>| <%= field %> | </th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% @order.order_items.each do |oi| %>
+        <th> <%= oi.id %> </th>
+        <th> <%= oi.unit_price %> </th>
+        <th> <%= oi.quantity %> </th>
+        <th> <%= oi.total_price %> </th>
+        <th> <%= oi.order_id %> </th>
+        <th> <%= link_to oi.product.name, product_path(oi.product) %> </th>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+<div>
+
+</div>
+
 
 <%= link_to 'Edit', edit_user_order_path(current_user,@order) %> |
 <%= link_to 'Back', user_orders_path %>

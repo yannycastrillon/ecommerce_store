@@ -23,7 +23,14 @@ class OrdersController < ApplicationController
 
   # POST /orders
   def create
+    # @order = current_order
+    # @order_item = @order.order_items.new(order_item_params)
+    # @order.save
+    # session[:order_id] = @order.id
+
+
     @order = Order.new(order_params)
+    # @order_item = @orden.order_items.new()
     @order.user_id = current_user.id
     respond_to do |format|
       if @order.save

@@ -20,5 +20,9 @@
   <%= @product.active %>
 </p>
 
+<div>
+  <%= link_to 'Add Cart', root_path,class:"btn btn-warning"%>
+</div>
+
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
