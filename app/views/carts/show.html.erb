@@ -1,0 +1,6 @@
+<div class="cart-component">
+  <%= form_tag new_user_order_path(current_user, my_order_items:@order_items), method:"get" do %>
+    <%= render 'shopping_cart', order_items: @order_items %>
+    <%= submit_tag "Make Order", class:"btn btn-warning" if session[:cart].size != 0 %>
+  <% end %>
+</div>

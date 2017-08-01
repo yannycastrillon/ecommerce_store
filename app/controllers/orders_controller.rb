@@ -23,22 +23,25 @@ class OrdersController < ApplicationController
 
   # POST /orders
   def create
-    # @order = current_order
-    # @order_item = @order.order_items.new(order_item_params)
-    # @order.save
-    # session[:order_id] = @order.id
-
 
     @order = Order.new(order_params)
-    # @order_item = @orden.order_items.new()
     @order.user_id = current_user.id
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to user_order_path(current_user,@order), notice: 'Order was successfully created.' }
-      else
-        format.html { render :new }
+    session[:cart].each { |cart_oi| @order.total += cart_oi["total_price"].to_d }
+    if @order.save
+      if session[:cart].size != 0
+        session[:cart].map do |cart_oi|
+          oi = OrderItem.new(cart_oi)
+          oi.order = @order
+          oi.save!
+        end
       end
+      # clear out the order items from the shopping cart
+      clear_session_cart
+      redirect_to user_order_path(current_user,@order), notice: "Order was successfully created with id: #{@order.id}"
+    else
+      render :new
     end
+
   end
 
   # PATCH/PUT /orders/1

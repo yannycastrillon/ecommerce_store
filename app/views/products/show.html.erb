@@ -19,10 +19,17 @@
   <strong>Active:</strong>
   <%= @product.active %>
 </p>
-
-<div>
-  <%= link_to 'Add Cart', root_path,class:"btn btn-warning"%>
-</div>
+<%= form_tag add_to_cart_path, method:"post" do %>
+  <div class="col-xs-4 input-group qty-control">
+    <%= hidden_field_tag "cart[product_id]", @product.id %>
+    <%= number_field_tag "cart[quantity]",nil, class:"form-control input-lg", style:"text-align:center;",  min:0, max:99 %>
+  	<span class="btn input-group-addon">Units.</span>
+  </div>
+  <br>
+  <div>
+    <%= submit_tag 'Add Cart', class:"btn btn-warning"%>
+  </div>
+<% end %>
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
