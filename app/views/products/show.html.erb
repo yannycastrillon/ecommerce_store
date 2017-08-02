@@ -15,6 +15,20 @@
   <%= @product.inventory %>
 </p>
 
+<% if @product.categories.size != 0 %>
+  <p>
+    <strong>Under Category:</strong>
+    <p style="text-indent: 50px;"> <%= @product.categories.first.name %></p>
+  </p>
+<% end %>
+
+<p>
+  <strong>Path</strong>
+  <% @categories.map do |category| %>
+    <p style="text-indent: 50px;"> <%= category.long_name %>  </p>
+  <% end %>
+</p>
+
 <p>
   <strong>Active:</strong>
   <%= @product.active %>
@@ -31,5 +45,7 @@
   </div>
 <% end %>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
+<% if is_admin? %>
+  <%= link_to 'Edit', edit_product_path(@product) %> |
+<% end %>
 <%= link_to 'Back', products_path %>

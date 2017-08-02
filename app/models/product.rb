@@ -12,4 +12,5 @@ class Product < ApplicationRecord
   def set_default_active
     self.active ||= true
   end
+
 end
