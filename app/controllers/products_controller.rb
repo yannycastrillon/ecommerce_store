@@ -1,6 +1,9 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_category_names, only: [:new,:edit]
+  before_action :is_admin?, only: [:new, :edit, :create, :update, :destroy]
+
   # GET /products
   def index
     @products = Product.all.actives
@@ -8,6 +11,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1
   def show
+     @categories = @product.categories
   end
 
   # GET /products/new
@@ -22,24 +26,21 @@ class ProductsController < ApplicationController
   # POST /products
   def create
     @product = Product.new(product_params)
-
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    if @product.save
+      set_category
+      redirect_to @product, notice: 'Product was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /products/1
   def update
-    respond_to do |format|
-      if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @product.update(product_params)
+      set_category
+      redirect_to @product, notice: 'Product was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -55,6 +56,16 @@ class ProductsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params[:id])
+    end
+
+    def set_category_names
+      @categories = Category.all.order_by_name
+    end
+
+    def set_category
+      cate_id = params[:category][:category_id]
+      category_id = cate_id.empty? ? @product.categories.first : cate_id.to_i
+      CategoryProduct.update_or_create(product_id:@product.id, category_id:category_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
