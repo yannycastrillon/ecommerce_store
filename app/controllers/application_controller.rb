@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   def is_admin?
     user_signed_in? && current_user.admin? ? true : false
-    # redirect_to root_path, flash: {error: "Warning! Only Admin privileges"} and return
+      # redirect_to root_path, flash: {error: "Warning! Only Admin privileges"} and return 
   end
 
   def current_order
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   # Add order item to cart
   def add_order_item_to_cart(order_item)
     # validates :cart exists on session.
-    ensure_cart_exists << order_item
+    session[:cart] << order_item
   end
 
   def clear_session_cart

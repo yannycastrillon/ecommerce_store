@@ -5,8 +5,11 @@ class Order < ApplicationRecord
 
   after_initialize :set_default_status, :if => :new_record?
   after_initialize :set_default_total, :if => :new_record?
-  
+
   enum status: [:pending, :cancelled, :complete]
+
+
+  # scope :by_user, -> { where { self.user_id:current_user.id } }
 
   def set_default_status
     self.status ||= :pending
@@ -15,4 +18,5 @@ class Order < ApplicationRecord
   def set_default_total
     self.total ||= 0
   end
+
 end

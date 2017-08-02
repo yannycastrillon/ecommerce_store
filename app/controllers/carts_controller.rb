@@ -1,5 +1,5 @@
 class CartsController < ApplicationController
-  before_action :ensure_cart_exists, only:[:show]
+  before_action :ensure_cart_exists, only:[:show, :add_order_item_to_cart]
   before_action :authenticate_user!
 
   def show
