@@ -1,8 +1,7 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!,:is_admin?, except: [:index, :show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_category_names, only: [:new,:edit]
-  before_action :is_admin?, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /products
   def index
