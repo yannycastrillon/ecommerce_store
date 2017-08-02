@@ -1,0 +1,29 @@
+<%= form_for(category) do |f| %>
+  <% if category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+      <% category.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="form-group col-xs-4">
+      <%= f.label :name, class:"control-label" %>
+      <%= f.text_field :name, class:"form-control" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-xs-4">
+      <%= f.label :parent_id, "Parent Category" %><br>
+      <%= collection_select(:category,:parent_id,@categories,:id,:long_name, {:include_blank => '- Select Category-', :selected => true}) %> 
+   </div>
+ </div>
+
+  <div class="actions">
+    <%= f.submit (f.object.new_record? ? "Create" : "Update" ), class:"btn btn-warning" %>
+  </div>
+<% end %>

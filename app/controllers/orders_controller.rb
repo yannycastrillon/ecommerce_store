@@ -1,11 +1,11 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :is_admin?, only: [:edit,:update,:destroy]
   before_action :authenticate_user!
-  # before_action :is_admin?, only: [:index]
 
   # GET /orders
   def index
-    @orders = Order.all
+    is_admin? ? @orders = Order.all : @orders = Order.where(user_id:current_user.id)
   end
 
   # GET /orders/1
