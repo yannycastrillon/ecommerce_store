@@ -4,9 +4,9 @@ class ApplicationController < ActionController::Base
   helper_method :is_admin?, :current_order, :ensure_cart_exists, :add_order_item_to_cart
 
   def is_admin?
-     current_user.admin?
-    #  user_signed_in? and ? true : false
-      # redirect_to root_path, flash: {error: "Warning! Only Admin privileges"} and return
+    unless current_user.admin?
+      redirect_to root_path, flash: {error: "Warning! Only Admin privileges"}
+    end
   end
 
   def current_order

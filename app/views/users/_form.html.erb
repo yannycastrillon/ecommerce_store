@@ -19,11 +19,11 @@
 
     <div class="form-group">
       <%= f.label :role, class:"control-label" %>
-      <%= f.number_field :role, class:"form-control" %>
+      <%= f.select :role, User.roles ,class:"form-control" %>
     </div>
 
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit (f.object.new_record? ? "Create" : "Update"), class:"btn btn-warning" %>
     </div>
   <% end %>
 </div>
