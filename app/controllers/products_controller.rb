@@ -46,9 +46,7 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   def destroy
     @product.destroy
-    respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
-    end
+    redirect_to products_url, notice: 'Product was successfully destroyed.'
   end
 
   private
