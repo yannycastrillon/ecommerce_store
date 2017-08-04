@@ -22,7 +22,7 @@ describe CategoriesController do
         user = FactoryGirl.create(:user, :customer)
         category = FactoryGirl.create(:category)
         sign_in user
-        get :index, nil, flash: { warning:"No Authorize" }
+        get :index, flash: { warning:"No Authorize" }
         expect(response).to redirect_to root_path
       end
     end
