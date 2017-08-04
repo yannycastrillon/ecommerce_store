@@ -4,7 +4,6 @@ describe OrdersController do
   describe 'GET #index' do
     context 'When current user is Customer list orders' do
       it 'Then populates cutomer´s orders' do
-        # Validate price with datatype money.
         user = FactoryGirl.create(:user, :customer)
         order = Order.create(email:'andres117@gmail.com',user_id:user.id)
         sign_in user
