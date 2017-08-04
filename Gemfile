@@ -36,12 +36,21 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Capistrano for deployment
+# Use Capistrano for deploymentspec
+
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'factory_girl_rails',    '~> 4.6.0'
+  gem 'rspec-rails'
+  gem 'rails-controller-testing'
+end
+
+group :test do
+  gem 'database_cleaner',         '1.5.1'
+  gem 'shoulda-matchers',         '3.1.1',  require: false
 end
 
 group :development do
