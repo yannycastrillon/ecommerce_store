@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe UsersController do
   describe '#index' do
-    context 'when admin' do
+    context 'When admin' do
       it 'populates array of users' do
         user = FactoryGirl.create(:user, :admin)
         sign_in user
@@ -18,7 +18,7 @@ describe UsersController do
       end
     end
 
-    context 'when customer' do
+    context 'When customer' do
       it 'redirects to root path' do
         user = FactoryGirl.create(:user)
         sign_in user
