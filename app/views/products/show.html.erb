@@ -36,7 +36,9 @@
 <%= form_tag add_to_cart_path, method:"post" do %>
   <div class="col-xs-4 input-group qty-control">
     <%= hidden_field_tag "cart[product_id]", @product.id %>
-    <%= number_field_tag "cart[quantity]",nil, class:"form-control input-lg", style:"text-align:center;",  min:0, max:99 %>
+    <%= number_field_tag "cart[quantity]",nil, class:"form-control input-lg",
+        style:"text-align:center;", value:1 ,min:1, max:99
+    %>
   	<span class="btn input-group-addon">Units.</span>
   </div>
   <br>

@@ -7,7 +7,11 @@
       <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency order_item.unit_price %></span></h4>
       <div class="row">
         <div class="col-xs-4">
-          <%= number_field :quantity, order_item.quantity, name:"cart[order_item.quantity]", value: order_item.quantity.to_i, class: "form-control", min: 1 %>
+          <%= label_tag :quantity, "Units:" %>
+          <%= number_field :quantity, order_item.quantity, name:"cart[order_item.quantity]",
+              value: order_item.quantity.to_i, disable:true, readonly:true,
+              class: "form-control", min: 1
+          %>
           <%= hidden_field :product_id, order_item.product_id, value: product.id %>
         </div>
         <div class="col-xs-8 text-right">

@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :is_admin?, only: [:edit,:update]
   before_action :authenticate_user!
+  before_action :verify_cart_has_items?, only: [:create]
 
   # GET /orders
   def index

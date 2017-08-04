@@ -1,5 +1,6 @@
 class CartsController < ApplicationController
-  before_action :ensure_cart_exists, only:[:show, :add_order_item_to_cart]
+  before_action :ensure_cart_exists, only: [:show, :add_order_item_to_cart,
+                                            :add_to_cart, :remove_from_cart]
   before_action :authenticate_user!
 
   def show
@@ -12,7 +13,7 @@ class CartsController < ApplicationController
   def add_to_cart
     @order_item = OrderItem.new(cart_params)
     @order_item.unit_price = @order_item.product.price
-    @order_item.total_price = @order_item.quantity * @order_item.unit_price
+    @order_item.total_price = @order_item.set_quantity * @order_item.unit_price
 
     add_order_item_to_cart(@order_item)
     redirect_to cart_path
