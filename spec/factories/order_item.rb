@@ -5,8 +5,10 @@ FactoryGirl.define do
 
     unit_price { 12 }
     quantity { 6 }
-    total_price { 15 }
+    total_price { unit_price * quantity }
 
-
+    # trail :quantity do
+    #   quantity 0
+    # end
   end
 end
