@@ -3,7 +3,7 @@
 
   <h1>Products</h1>
 
-  <table>
+  <table class="table table-hover table-striped">
     <thead>
       <tr>
         <th>Name</th>
@@ -17,14 +17,14 @@
     <tbody>
       <% @products.each do |product| %>
         <tr>
-          <td><%= product.name %></td>
-          <td><%= product.price %></td>
+          <td><%= label_tag product.name,nil,style:"font-size:18px;" %></td>
+          <td><%= number_to_currency product.price %></td>
           <td><%= product.inventory %></td>
-          <td><%= product.active %></td>
-          <td><%= link_to 'Show', product %></td>
+          <td><%= label_tag product.active,nil,style:"color:green;" %></td>
+          <td><%= link_to 'Details', product %></td>
           <% if !current_user.nil? and current_user.admin? %>
-            <td> | <%= link_to 'Edit', edit_product_path(product) %></td>
-            <td> | <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Modify', edit_product_path(product) %></td>
+            <td><%= link_to 'Delete', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% end %>
 
         </tr>

@@ -2,7 +2,7 @@
 
 <h1>Categories</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
@@ -14,9 +14,9 @@
     <% @categories.each do |category| %>
       <tr>
         <td><%= category.long_name %></td>
-        <td><%= link_to 'Show', category %> | </td>
-        <td><%= link_to 'Edit', edit_category_path(category) %> | </td>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Detail', category %></td>
+        <td><%= link_to 'Modify', edit_category_path(category) %></td>
+        <td><%= link_to 'Delete', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
