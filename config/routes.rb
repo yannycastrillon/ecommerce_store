@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/products' => 'products#index', as: :products
   get '/home' => 'products#index', as: :home
 
+  get '/products/inactives' => 'products#inactives'
   devise_for :users
   resources :categories
 
@@ -11,7 +12,7 @@ Rails.application.routes.draw do
   delete 'cart/remove/:cart_list_id' => 'carts#remove_from_cart', as: :remove_from_cart
   resources :products
 
-  resources :users do
+  resources :users, except:[:new, :create] do
     resources :orders
   end
 end

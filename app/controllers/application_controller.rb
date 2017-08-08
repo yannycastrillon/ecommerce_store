@@ -1,12 +1,17 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  helper_method :is_admin?, :current_order, :ensure_cart_exists, :add_order_item_to_cart
+  helper_method :is_admin?, :current_order, :ensure_cart_exists, :add_order_item_to_cart,
+                :verify_cart_has_items?
 
   def is_admin?
-     current_user.admin?
-    #  user_signed_in? and ? true : false
-      # redirect_to root_path, flash: {error: "Warning! Only Admin privileges"} and return
+    unless current_user.admin?
+      redirect_to root_path, flash: { error: "Warning! Only Admin privileges" }
+    end
+  end
+
+  def verify_cart_has_items?
+    redirect_to root_path, flash: { error:"Please add item to Cart" } if session[:cart].nil?
   end
 
   def current_order

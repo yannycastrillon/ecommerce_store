@@ -49,30 +49,30 @@
 <hr>
 <br>
 <h4>Order Items</h4>
-<table>
+
+<table class="table table-striped">
   <thead>
     <tr>
       <% OrderItem.column_names.map do |field| %>
-        <th>| <%= field %> | </th>
+        <th><%= field %></th>
       <% end %>
     </tr>
   </thead>
   <tbody>
-    <tr>
       <% @order.order_items.each do |oi| %>
-        <th> <%= oi.id %> </th>
-        <th> <%= oi.unit_price %> </th>
+      <tr>
+        <th scope="row"> <%= oi.id %> </th>
+        <th> <%= number_to_currency oi.unit_price %> </th>
         <th> <%= oi.quantity %> </th>
-        <th> <%= oi.total_price %> </th>
+        <th> <%= number_to_currency oi.total_price %> </th>
         <th> <%= oi.order_id %> </th>
         <th> <%= link_to oi.product.name, product_path(oi.product) %> </th>
+        <th> <%= oi.created_at %> </th>
+        <th> <%= oi.updated_at %> </th>
+      </tr>
       <% end %>
-    </tr>
   </tbody>
 </table>
-<div>
-
-</div>
 
 
 <%= link_to 'Edit', edit_user_order_path(current_user,@order) %> |

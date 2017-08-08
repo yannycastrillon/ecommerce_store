@@ -19,10 +19,7 @@
   <div class="row">
     <div class="form-group col-xs-4">
       <%= f.label :parent_id, "Parent Category" %><br>
-      <%= collection_select(:category, :parent_id, @categories, :id, :long_name,
-                  { :include_blank => '- Select Category-', :selected => true },
-                  class:"form-control")
-      %>
+      <%= collection_select(:category,:parent_id,@categories,:id,:long_name, {:include_blank => '- Select Category-', :selected => true}) %>
    </div>
  </div>
 

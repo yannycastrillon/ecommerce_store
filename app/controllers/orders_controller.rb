@@ -1,11 +1,12 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-  before_action :is_admin?, only: [:edit,:update,:destroy]
+  before_action :is_admin?, only: [:edit,:update]
   before_action :authenticate_user!
+  before_action :verify_cart_has_items?, only: [:create]
 
   # GET /orders
   def index
-    is_admin? ? @orders = Order.all : @orders = Order.where(user_id:current_user.id)
+     @orders = current_user.admin? ? Order.all : Order.where(user_id:current_user.id)
   end
 
   # GET /orders/1
@@ -23,7 +24,6 @@ class OrdersController < ApplicationController
 
   # POST /orders
   def create
-
     @order = Order.new(order_params)
     @order.user_id = current_user.id
     session[:cart].each { |cart_oi| @order.total += cart_oi["total_price"].to_d }
@@ -46,21 +46,17 @@ class OrdersController < ApplicationController
 
   # PATCH/PUT /orders/1
   def update
-    respond_to do |format|
-      if @order.update(order_params)
-        format.html { redirect_to user_order_path(current_user,@order), notice: 'Order was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @order.update(order_params)
+      redirect_to user_order_path(current_user,@order), notice: 'Order was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /orders/1
   def destroy
-    @order.destroy
-    respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
-    end
+    @order.update(status: :cancelled)
+    redirect_to user_orders_path(current_user), notice: 'Order was successfully Cancelled.'
   end
 
   private

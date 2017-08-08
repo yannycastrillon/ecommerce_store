@@ -1,12 +1,17 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!,:is_admin?, except: [:index, :show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_category_names, only: [:new,:edit]
-  before_action :is_admin?, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /products
   def index
-    @products = Product.all.actives
+    search = Product.search do
+      fulltext product_searchable[:search]
+    end
+    @products = search.results.empty? ? Product.all.actives : search.results
+    byebug
+  #   @search.facet(:skill_ids).rows.each do |row|
+  # = row.instance.name
   end
 
   # GET /products/1
@@ -47,11 +52,12 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   def destroy
     @product.destroy
-    respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
-    end
+    redirect_to products_url, notice: 'Product was successfully destroyed.'
   end
 
+  def inactives
+    @products = Product.all.inactives
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
@@ -71,5 +77,9 @@ class ProductsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
       params.require(:product).permit(:name, :price, :money, :inventory, :active)
+    end
+
+    def product_searchable
+      params.permit(:search)
     end
 end
