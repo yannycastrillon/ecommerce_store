@@ -17,7 +17,7 @@
     <tbody>
       <% @products.each do |product| %>
         <tr>
-          <td><%= label_tag product.name,nil,style:"font-size:18px;" %></td>
+          <td><%= link_to product.name,product_path(product),style:"font-size:18px;" %></td>
           <td><%= number_to_currency product.price %></td>
           <td><%= product.inventory %></td>
           <td><%= label_tag product.active,nil,style:"color:green;" %></td>

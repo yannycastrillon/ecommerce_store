@@ -5,7 +5,13 @@ class ProductsController < ApplicationController
 
   # GET /products
   def index
-    @products = Product.all.actives
+    search = Product.search do
+      fulltext product_searchable[:search]
+    end
+    @products = search.results.empty? ? Product.all.actives : search.results
+    byebug
+  #   @search.facet(:skill_ids).rows.each do |row|
+  # = row.instance.name
   end
 
   # GET /products/1
@@ -49,6 +55,9 @@ class ProductsController < ApplicationController
     redirect_to products_url, notice: 'Product was successfully destroyed.'
   end
 
+  def inactives
+    @products = Product.all.inactives
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
@@ -68,5 +77,9 @@ class ProductsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
       params.require(:product).permit(:name, :price, :money, :inventory, :active)
+    end
+
+    def product_searchable
+      params.permit(:search)
     end
 end

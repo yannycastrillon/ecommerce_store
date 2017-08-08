@@ -25,12 +25,16 @@
         <% if user_signed_in? %>
           <div id="secondary-navbar">
             <div id="main-submenu">
+              <%= form_tag products_path, method: :get do  %>
               <ul>
                 <% if current_user.admin?  %>
                   <%= link_to 'All Users', users_path  %> |
                   <%= link_to 'All Categories', categories_path %> |
                 <% end %>
+                  <%= text_field_tag :search %>
+                  <%= submit_tag "Search", :name => nil %>
               </ul>
+              <% end %>
             </div>
           </div>
         <% else %>
