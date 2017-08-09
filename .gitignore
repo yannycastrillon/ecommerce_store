@@ -15,3 +15,20 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# Ignore all solr test data and development data
+solr/test/data/*
+solr/development/data/*
+*/dataimport.properties
+*.fdx
+*.fnm
+*.nvd
+*.nvm
+*.si
+*.doc
+*.pos
+*.tim
+*.tip
+*.fdt
+*.liv
+.env
