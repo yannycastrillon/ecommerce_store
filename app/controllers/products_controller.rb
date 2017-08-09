@@ -7,15 +7,15 @@ class ProductsController < ApplicationController
 
   # GET /products
   def index
-    # search = search_products
-    # if search_params[:search_term].blank?
-    @products = Product.all.actives
-    # else
-      # @products = search.results
-      # @total = search.total
-      # @total_pages = search.results.total_pages
-      # flash[:notice] = "Products found with given criteria"
-    # end
+    search = search_products
+    if search_params[:search_term].blank?
+      @products = Product.all.actives
+    else
+      @products = search.results
+      @total = search.total
+      @total_pages = search.results.total_pages
+      flash[:notice] = "Products found with given criteria"
+    end
   end
 
   # GET /products/1
@@ -77,7 +77,7 @@ class ProductsController < ApplicationController
 
     def set_category
       cate_id = params[:category][:category_id]
-      # category_id = cate_id.empty? ? @product.categories.first : cate_id.to_i
+      category_id = cate_id.empty? ? @product.categories.first : cate_id.to_i
       CategoryProduct.update_or_create(product_id:@product.id, category_id:cate_id.to_i)
     end
 
@@ -90,14 +90,14 @@ class ProductsController < ApplicationController
       params.permit(:search_term)
     end
 
-    # def search_products
-    #   # Intance variable provided from Pagination Module
-    #   page = @page
-    #   limit= @limit
-    #   # Eager loading!!!
-    #   search = Product.search(include: [:categories,:category_products]) do |searcher|
-    #     searcher.fulltext search_params[:search_term]
-    #     searcher.paginate page: page, per_page: limit
-    #   end
-    # end
+    def search_products
+      # Intance variable provided from Pagination Module
+      page = @page
+      limit= @limit
+      # Eager loading!!!
+      search = Product.search(include: [:categories,:category_products]) do |searcher|
+        searcher.fulltext search_params[:search_term]
+        searcher.paginate page: page, per_page: limit
+      end
+    end
 end

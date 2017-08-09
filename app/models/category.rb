@@ -19,8 +19,8 @@ class Category < ApplicationRecord
     "#{ancestors_name} #{name}"
   end
 
-  # searchable do
-  #   text :name
-  #   integer :id
-  # end
+  searchable do
+    text :name
+    integer :id
+  end
 end
