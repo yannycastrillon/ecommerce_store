@@ -1,17 +1,22 @@
 class ProductsController < ApplicationController
+  include Pagination
   before_action :authenticate_user!,:is_admin?, except: [:index, :show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_category_names, only: [:new,:edit]
+  before_action :set_pagination_params, only: [:index]
 
   # GET /products
   def index
-    search = Product.search do
-      fulltext product_searchable[:search]
+    search = search_products
+    # byebug
+    if search_params[:search_term].blank?
+      @products = Product.all.actives
+    else
+      @products = search.results
+      @total = search.total
+      @total_pages = search.results.total_pages
+      flash[:notice] = "Products found with given criteria"
     end
-    @products = search.results.empty? ? Product.all.actives : search.results
-    byebug
-  #   @search.facet(:skill_ids).rows.each do |row|
-  # = row.instance.name
   end
 
   # GET /products/1
@@ -31,6 +36,7 @@ class ProductsController < ApplicationController
   # POST /products
   def create
     @product = Product.new(product_params)
+    @product.description = Category.find(params[:category][:category_id].to_i).name+" | "+@product.description
     if @product.save
       set_category
       redirect_to @product, notice: 'Product was successfully created.'
@@ -58,7 +64,9 @@ class ProductsController < ApplicationController
   def inactives
     @products = Product.all.inactives
   end
-  private
+
+  private # --------------------------------------------------------------------
+
     # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params[:id])
@@ -76,10 +84,21 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :price, :money, :inventory, :active)
+      params.require(:product).permit(:name, :price, :money, :inventory, :active, :description)
     end
 
-    def product_searchable
-      params.permit(:search)
+    def search_params
+      params.permit(:search_term)
+    end
+
+    def search_products
+      # Intance variable provided from Pagination Module
+      page = @page
+      limit= @limit
+      # Eager loading!!!
+      search = Product.search(include: [:categories,:category_products]) do |searcher|
+        searcher.fulltext search_params[:search_term]
+        searcher.paginate page: page, per_page: limit
+      end
     end
 end

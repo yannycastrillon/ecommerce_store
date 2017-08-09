@@ -1,8 +1,9 @@
 <div class="home-component">
-  <p id="notice"><%= notice %></p>
-
   <h1>Products</h1>
 
+
+  <%= "<div>Total Pages: #{@total_pages} </div>".html_safe unless @total_pages.nil?%>
+  <%= "<div>Total Results: #{@total} </div>".html_safe unless @total.nil?%>
   <table class="table table-hover table-striped">
     <thead>
       <tr>

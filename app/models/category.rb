@@ -18,4 +18,9 @@ class Category < ApplicationRecord
   def long_name
     "#{ancestors_name} #{name}"
   end
+
+  searchable do
+    text :name
+    integer :id
+  end
 end

@@ -10,18 +10,16 @@ class Product < ApplicationRecord
   scope :actives, -> { where(active:true) }
   scope :inactives, -> { where(active:false) }
 
-  # def set_active
-  #   Proc.new { |x| -> }
-  # end
-
   def set_default_values
     self.inventory ||= 0
     self.active = self.inventory > 0 ? true : false
   end
 
   searchable do
+    integer :id
     text :name
-    # text :created_at, :created_month
+    text :description
+    
     text :categories do
       categories.map(&:name)
     end

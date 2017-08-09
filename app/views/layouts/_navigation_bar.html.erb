@@ -1,8 +1,8 @@
 <div class="navbar-component">
   <nav class="navbar navbar-inverse navbar-fixed-top principal-nav-bar">
-    <div class="col-md-2">
+    <div class="col-md-1">
     </div>
-    <div class="col-md-10">
+    <div class="col-md-11">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" {{ action "toggleMenu" }}>
           <span class="sr-only">Toggle navigation</span>
@@ -12,36 +12,29 @@
         </button>
       </div>
       <div id="navbar" class="collapse navbar-collapse" style="margin-top: 0.8em;">
+        <%= form_tag products_path, method: :get do  %>
         <ul class="nav navbar-nav">
           <% if user_signed_in? %>
-            <span style="color:lightgray;">Logged in as <strong > <%= current_user.email %> </strong> ||| </span>
-            <%= link_to 'Home', home_path%> |
-            <%= link_to 'Edit Profile', edit_user_registration_path %> |
-            <%= link_to 'My orders', user_orders_path(current_user) %> |
-            <%= link_to 'My Cart', cart_path %> |
-            <%= link_to 'Sign out', destroy_user_session_path, method: :delete %> |
+            <li><%= link_to "Logged in as #{ current_user.email}",user_path(current_user) , styles:"color:blue;"%> | </li>
+            <li><%= link_to 'Home', home_path%> | </li>
+            <li><%= link_to 'Edit Profile', edit_user_registration_path %> | </li>
+            <li><%= link_to 'My orders', user_orders_path(current_user) %> | </li>
+            <li><%= link_to 'My Cart', cart_path %> | </li>
+            <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %> | </li>
+            <li><%= text_field_tag :search_term, "", placeholder:"Ex: Products, Categories", class:"form-control", style:"margin-top:0.5em;" %> </li>
+            <li><%= submit_tag "Search", :name => nil, class:"btn btn-warning", style:"margin-top:0.5em;"%> | </li>
           <% end %>
-        </ul>
         <% if user_signed_in? %>
-          <div id="secondary-navbar">
-            <div id="main-submenu">
-              <%= form_tag products_path, method: :get do  %>
-              <ul>
-                <% if current_user.admin?  %>
-                  <%= link_to 'All Users', users_path  %> |
-                  <%= link_to 'All Categories', categories_path %> |
-                <% end %>
-                  <%= text_field_tag :search %>
-                  <%= submit_tag "Search", :name => nil %>
-              </ul>
+              <% if current_user.admin?  %>
+                <li><%= link_to 'All Users', users_path  %> | </li>
+                <li><%= link_to 'All Categories', categories_path %> | </li>
               <% end %>
-            </div>
-          </div>
         <% else %>
-          <%= link_to 'Sign up', new_user_registration_path %> |
-          <%= link_to 'Sign in', new_user_session_path %>
+          <li><%= link_to 'Sign up', new_user_registration_path %> | </li>
+          <li><%= link_to 'Sign in', new_user_session_path %> | </li>
         <% end %>
-      </div>
+      </ul>
+      <% end %>
     </div>
-  </nav>`
+  </nav>
 </div>
