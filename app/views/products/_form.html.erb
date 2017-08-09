@@ -26,10 +26,14 @@
     <%= f.label :inventory, class:"control-label" %>
     <%= f.number_field :inventory, class:"form-control" %>
   </div>
+  <div class="form-group">
+    <%= f.label :description, class:"control-label" %>
+    <%= f.text_area :description, class:"form-control", rows:5 %>
+  </div>
 
   <div class="form-group">
-    <%= f.label :active, class:"control-label" %>
-    <%= f.check_box :active, class:"form-control" %>
+    <%= f.label :active, "Activate?" ,class:"control-label" %>
+    <%= f.check_box :active %>
   </div>
   <div class="form_group">
     <%= f.label "Under Category: ", class:"control-label" %>

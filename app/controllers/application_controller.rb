@@ -6,12 +6,12 @@ class ApplicationController < ActionController::Base
 
   def is_admin?
     unless current_user.admin?
-      redirect_to root_path, flash: {error: "Warning! Only Admin privileges"}
+      redirect_to root_path, flash: { error: "Warning! Only Admin privileges" }
     end
   end
 
   def verify_cart_has_items?
-    redirect_to root_path, flash: {error:"Please add item to Cart"} if session[:cart].nil?
+    redirect_to root_path, flash: { error:"Please add item to Cart" } if session[:cart].nil?
   end
 
   def current_order

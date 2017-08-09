@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/products' => 'products#index', as: :products
   get '/home' => 'products#index', as: :home
 
+  get '/products/inactives' => 'products#inactives'
   devise_for :users
   resources :categories
 
