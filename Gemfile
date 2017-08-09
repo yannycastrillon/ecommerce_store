@@ -7,7 +7,7 @@ end
 
 gem 'rails-env'
 gem 'faker'
-gem 'sunspot_rails'
+# gem 'sunspot_rails'
 gem 'acts_as_tree'
 gem 'pry'
 gem 'devise'

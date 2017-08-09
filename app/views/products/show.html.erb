@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @product.name %>
+  <strong>Product Name:</strong>
+  <%= @product.name.upcase %>
 </p>
 
 <p>
-  <strong>Price:</strong>
-  <%= @product.price %>
+  <strong >Price:</strong>
+  <span class="text-danger"> <%= number_to_currency @product.price %></span>
 </p>
 
 <p>
@@ -17,8 +17,8 @@
 
 <% if @product.categories.size != 0 %>
   <p>
-    <strong>Under Category:</strong>
-    <p style="text-indent: 50px;"> <%= @product.categories.first.name %></p>
+    <strong>Under Categories:</strong>
+    <p style="text-indent: 50px;"> <%= @product.categories.map{|c| c.name.upcase}.join(" and ") %></p>
   </p>
 <% end %>
 
@@ -36,7 +36,7 @@
 
 <p>
   <strong>Active:</strong>
-  <%= @product.active %>
+  <span class="text-success"><%= @product.active %></span>
 </p>
 <%= form_tag add_to_cart_path, method:"post" do %>
   <div class="col-xs-4 input-group qty-control">

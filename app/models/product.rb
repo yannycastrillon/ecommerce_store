@@ -15,17 +15,17 @@ class Product < ApplicationRecord
     self.active = self.inventory > 0 ? true : false
   end
 
-  searchable do
-    integer :id
-    text :name
-    text :description
-    
-    text :categories do
-      categories.map(&:name)
-    end
-  end
-
-  def created_month
-    created_at.strftime("%B %Y")
-  end
+  # searchable do
+  #   integer :id
+  #   text :name
+  #   text :description
+  #
+  #   text :categories do
+  #     categories.map(&:name)
+  #   end
+  # end
+  #
+  # def created_month
+  #   created_at.strftime("%B %Y")
+  # end
 end

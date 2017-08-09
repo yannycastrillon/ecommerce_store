@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  has_many :category_products
+  has_many :category_products, dependent: :delete_all
   has_many :products, through: :category_products
   acts_as_tree
 
@@ -19,8 +19,8 @@ class Category < ApplicationRecord
     "#{ancestors_name} #{name}"
   end
 
-  searchable do
-    text :name
-    integer :id
-  end
+  # searchable do
+  #   text :name
+  #   integer :id
+  # end
 end
