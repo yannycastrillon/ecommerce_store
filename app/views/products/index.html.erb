@@ -23,7 +23,7 @@
           <td><%= product.inventory %></td>
           <td><%= label_tag product.active,nil,style:"color:green;" %></td>
           <td><%= link_to 'Details', product %></td>
-          <% if !current_user.nil? and current_user.admin? %>
+          <% if current_user.present? and current_user.admin? %>
             <td><%= link_to 'Modify', edit_product_path(product) %></td>
             <td><%= link_to 'Delete', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% end %>
@@ -34,6 +34,6 @@
   </table>
 
   <br>
-  <% if !current_user.nil? and current_user.admin? %>
+  <% if current_user.present? and current_user.admin? %>
     <%= link_to 'New Product', new_product_path %>
   <% end %>
