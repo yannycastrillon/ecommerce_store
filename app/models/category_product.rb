@@ -8,7 +8,7 @@ class CategoryProduct < ApplicationRecord
   end
 
   def self.assign_or_new(attributes)
-    obj = first || new
+    obj = CategoryProduct.find_by(product_id:attributes[:product_id],category_id:attributes[:category_id]) || new
     obj.assign_attributes(attributes)
     obj
   end

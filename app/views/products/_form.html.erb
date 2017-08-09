@@ -36,12 +36,12 @@
     <%= f.check_box :active %>
   </div>
   <div class="form_group">
-    <%= f.label "Under Category: ", class:"control-label" %>
-    <span><%= @product.categories.first.name.upcase unless @product.categories.first.nil?%> </span>
+    <%= f.label "Under Categories: ", class:"control-label" %>
+    <span><%= @product.categories.map{|c| c.name.upcase}.join(' - ') unless @product.categories.first.nil?%> </span>
   </div><br>
 
   <div class="form-group">
-    <%= f.label :category_id, "Change category?", class:"control-label"%><br>
+    <%= f.label :category_id, "Add Category:", class:"control-label"%><br>
     <%= collection_select(:category,:category_id,@categories,:id,:long_name,
                  {:include_blank => '- Select Category-', :selected => true},
                   class:"form-control")
