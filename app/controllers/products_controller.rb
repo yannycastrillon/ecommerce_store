@@ -8,7 +8,6 @@ class ProductsController < ApplicationController
   # GET /products
   def index
     # search = search_products
-    # byebug
     # if search_params[:search_term].blank?
     @products = Product.all.actives
     # else
@@ -47,7 +46,6 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1
   def update
-    byebug
     if @product.update(product_params)
       set_category
       redirect_to @product, notice: 'Product was successfully updated.'
