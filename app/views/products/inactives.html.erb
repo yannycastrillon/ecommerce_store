@@ -1,5 +1,5 @@
-<div class="home-component">
-  <h1>Products</h1>
+<div class="inactive-product-component">
+  <h1>Inactive Products</h1>
 
 
   <%= "<div>Total Pages: #{@total_pages} </div>".html_safe unless @total_pages.nil?%>
@@ -36,5 +36,4 @@
   <br>
   <% if current_user.present? and current_user.admin? %>
     <%= link_to 'New Product', new_product_path %>
-    <%= link_to 'List Inactive Products', products_inactives_path %>
   <% end %>

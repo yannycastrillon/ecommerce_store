@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   include Pagination
-  before_action :authenticate_user!,:is_admin?, except: [:index, :show]
+  before_action :authenticate_user!,:is_admin?, except: [:index, :show, :inactives]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_category_names, only: [:new,:edit]
   before_action :set_pagination_params, only: [:index]
@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
   def index
     search = search_products
     if search_params[:search_term].blank?
-      @products = Product.all.actives
+      @products = Product.set_active(true)
     else
       @products = search.results
       @total = search.total
@@ -61,7 +61,7 @@ class ProductsController < ApplicationController
   end
 
   def inactives
-    @products = Product.all.inactives
+    @products = Product.set_active(false)
   end
 
   private # --------------------------------------------------------------------

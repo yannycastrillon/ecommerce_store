@@ -7,8 +7,10 @@ class Product < ApplicationRecord
   after_initialize :set_default_values, :if => :new_record?
 
   # filters only active products products
-  scope :actives, -> { where(active:true) }
-  scope :inactives, -> { where(active:false) }
+  # scope :actives, -> { where(active:true) }
+  # scope :inactives, -> { where(active:false) }
+
+  scope :set_active, -> (be_active) { where( active: be_active ) }
 
   def set_default_values
     self.inventory ||= 0
