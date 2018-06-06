@@ -4,7 +4,7 @@
 An e-commerce store that sells a variety of products using server side framework Ruby on Rails.
 
 | Home Page     | Category Page               |
-|---------------|                             |
+|---------------|--------------------         |
 | ![](ecommerce_home.png)| ![](categories.png)|
 
 ## Functionalities
