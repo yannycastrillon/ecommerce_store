@@ -7,7 +7,6 @@ An e-commerce store that sells a variety of products using server side framework
 |---------------|                             |
 | ![](ecommerce_home.png)| ![](categories.png)|
 
-
 ## Functionalities
 * Separates 'user' role for 'admins'.
   - Admin manages the products inventory, view orders, categories/subcategories and user's information on customers.
@@ -22,23 +21,39 @@ An e-commerce store that sells a variety of products using server side framework
 
 ## Instructions to execute code
 
-Things you may want to cover:
+#### Production
+* Project Url: https://ecommerce-store-kalebr.herokuapp.com/home
+  - Search Engine functionality not working on productions because you're entitle to pay ($15/month) to have an instance of SORL running in production.
+  - Admin credentials
+    * username: admin@gmail.com
+    * password: admin123
+  - Create regular user on the application.
 
-* Ruby version
+#### Development
+* Clone the repository from Github.
+  - https://github.com/yannycastrillon/ecommerce_store
+* Open a terminal, go to your proyect's directory and run `bundle install` --> Install all your dependencies gems.
+* Must run this command `rails db:create`, `rails db:migrate` to run db migrations.
+* Later you must run:
+* `rails s`  for the application to work on "localhost:3000".
+* We must run the sunspot Solr server locally to be able to have search functionality. `RAILS_ENV=development bundle exec rake sunspot:solr:start`.
 
-* System dependencies
+## Rspec
+* Make sure all testing specs are green.
+  - Run the command `RAILS_ENV=test bundle exec rake sunspot:solr:start`. To start Solr server on testing environment. (This will create the write.lock file on Solr directory).
 
-* Configuration
+    ![](write.lock.png)
 
-* Database creation
+  - Run specs `bundle exec rspec spec`.
 
-* Database initialization
+    ![](rspec_ecommerce.png)
 
-* How to run the test suite
+## Entity Model
 
-* Services (job queues, cache servers, search engines, etc.)
+![](entity_model_ecommerce_store.png)
 
-* Deployment instructions
+## What's next!
 
 - Incorportate **Twillio Authy** for **2-factor** authentication during a purchase.
 - Refactor to make code DRY.
+
