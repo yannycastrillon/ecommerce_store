@@ -1,13 +1,11 @@
-# README
-
-# ecommerce_store
+# Ecommerce_store
 
 ### Description
 An e-commerce store that sells a variety of products using server side framework Ruby on Rails.
 
-![](ecommerce_home.png)
-
-![](categories.png)
+| Home Page     | Category Page               |
+|---------------|                             |
+| ![](ecommerce_home.png)| ![](categories.png)|
 
 ## Functionalities
 * Separates 'user' role for 'admins'.
@@ -20,7 +18,6 @@ An e-commerce store that sells a variety of products using server side framework
 * Uses `devise` power gem to manage user authentication.
 * Follows a very easy to navigate interface.
 (Bootstrap for front-end).
-
 
 ## Instructions to execute code
 
@@ -49,7 +46,7 @@ An e-commerce store that sells a variety of products using server side framework
 
   - Run specs `bundle exec rspec spec`.
 
-  ![](rspec_ecommerce.png)
+    ![](rspec_ecommerce.png)
 
 ## Entity Model
 
@@ -58,3 +55,5 @@ An e-commerce store that sells a variety of products using server side framework
 ## What's next!
 
 - Incorportate **Twillio Authy** for **2-factor** authentication during a purchase.
+- Refactor to make code DRY.
+
