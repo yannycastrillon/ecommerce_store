@@ -30,4 +30,6 @@ class Product < ApplicationRecord
   def created_month
     created_at.strftime("%B %Y")
   end
+  def my_new_user
+  end
 end
