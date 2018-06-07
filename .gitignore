@@ -17,6 +17,7 @@
 .byebug_history
 
 # Ignore all solr test data and development data
+solr/pids/*
 solr/test/data/*
 solr/development/data/*
 */dataimport.properties
